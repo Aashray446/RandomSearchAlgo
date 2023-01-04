@@ -5,9 +5,9 @@ import SolutionPanel from "../components/solutionPanel";
 export default function ControlPanel() {
 
     return (
-        <div className="w-1/3 hidden-scroll">
+        <div className="w-1/3 hidden-scroll hidden sm:block">
 
-            <ControllerPanel></ControllerPanel>
+            <ControllerPanel ></ControllerPanel>
             <QuizPanel></QuizPanel>
             <SolutionPanel></SolutionPanel>
         </div>

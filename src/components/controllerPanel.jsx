@@ -1,6 +1,6 @@
 import Switch from "./mini/switch";
 
-export default function ControllerPanel() {
+export default function ControllerPanel(props) {
 
     return (
         <div className="grid grid-cols-2 gap-10 tracking-widest p-5 bg-base-100 m-4">

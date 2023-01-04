@@ -16,7 +16,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className="h-full flex flex-row">
+    <div className="h-full flex flex-col sm:flex-row ">
       <ControlPanel ></ControlPanel>
       <RouterProvider router={router} />
     </div>

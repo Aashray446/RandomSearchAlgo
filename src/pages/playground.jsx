@@ -1,12 +1,11 @@
 import React from "react";
+import D3Container from "../components/d3Container";
 
 export default function Playground() {
 
     return (
-        <div className="w-2/3 m-4 h-full hidden-scroll bg-white">
-            <svg id="playGround">
-
-            </svg>
+        <div className="sm:w-2/3  h-screen">
+            <D3Container nodes={20} links={20} />
         </div>
     );
 }
