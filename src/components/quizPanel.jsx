@@ -40,7 +40,6 @@ export default function QuizPanel(props) {
             answer: "3"
         }
     ]
-
     return (
 
         <div className="p-5 bg-base-100 m-4" >
