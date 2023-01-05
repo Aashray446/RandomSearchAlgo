@@ -8,6 +8,7 @@ export default function ControllerPanel(props) {
             <button className="btn btn-primary">Generate Random</button>
             <input type="number" className="input input-bordered input-accent bg-white" placeholder="Source Node" />
             <input type="number" className="input input-bordered input-accent bg-white col-span-full " placeholder="Destination Node" />
+            <button className="btn btn-secondary">Find Path</button>
         </div>
 
     );
