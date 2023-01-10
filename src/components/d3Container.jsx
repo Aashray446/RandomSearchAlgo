@@ -1,41 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import * as randomSearch from "../experiments/randomSearch";
 import { runForceGraph } from "../experiments/graphGenerator";
-// import styles from "./forceGraph.module.css";
 
 
-class ForceGraph extends React.Component {
-    constructor(props) {
-        super(props);
-        this.containerRef = React.createRef();
-        this.state = {
-            nodes: props.nodes,
-            links: props.links,
-        };
-        this.destroyFn = () => { };
-    }
+const ForceGraph = ({ noOfNodes, noOfLinks }) => {
+    const containerRef = useRef(null);
 
-    componentDidMount() {
-        const { nodes, links } = randomSearch.generateDirectedNodesAndLinks(this.state.nodes, this.state.links);
-        let destroyFn;
-        if (this.containerRef.current) {
-            const { destroy } = runForceGraph(this.containerRef.current, links, nodes, {
-                color: "#FFFF66",
-                radius: 26,
-            });
-            destroyFn = destroy;
+
+    useEffect(() => {
+        const { nodes, links } = randomSearch.generateDirectedNodesAndLinks(noOfNodes, noOfLinks);
+        if (containerRef.current) {
+            runForceGraph(
+                containerRef.current,
+                links,
+                nodes,
+                {
+                    color: "#FFFF66",
+                    radius: 26,
+                }
+            );
         }
-        console.log(this.containerRef.current);
-        return destroyFn;
-    }
+    }, [noOfNodes, noOfLinks]);
 
-    componentWillUnmount() {
-        this.destroyFn();
-    }
-
-    render() {
-        return <div ref={this.containerRef} className="h-full" />;
-    }
-}
+    return <div ref={containerRef} className="h-full" />;
+};
 
 export default ForceGraph;

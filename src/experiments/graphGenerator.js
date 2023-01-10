@@ -5,7 +5,9 @@ export const runForceGraph = (container, linksData, nodesData, {
     radius,
 }) => {
 
-
+    if (container.innerHTML != "") {
+        container.innerHTML = "";
+    }
 
     const containerRect = container.getBoundingClientRect();
     const height = containerRect.height;
@@ -113,11 +115,7 @@ export const runForceGraph = (container, linksData, nodesData, {
         node
             .attr("transform", function (d) {
                 return "translate(" + d.x + "," + d.y + ")";
-            })
-
-        // d3.selectAll("g.nodes g")
-        //     .classed("active", d => d.active);
-
+            });
     });
 
     return {
