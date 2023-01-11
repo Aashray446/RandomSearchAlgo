@@ -33,3 +33,14 @@
   @apply rounded;
 }
 
+.activated {
+  fill: aquamarine !important;
+}
+
+.deadEnd {
+  fill: red !important;
+}
+
+.found {
+  fill : green !important;
+}

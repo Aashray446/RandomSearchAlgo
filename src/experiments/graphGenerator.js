@@ -21,8 +21,8 @@ export const runForceGraph = (container, linksData, nodesData, {
     const forceY = d3.forceY().y(d => d.y).strength(0.01);
 
     const simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(d => d.id).strength(d => linkStrengthScale(d.value / 20)))
-        .force("charge", d3.forceManyBody().strength(-50))
+        .force("link", d3.forceLink().id(d => d.id).strength(d => linkStrengthScale(d.value / 1000)))
+        .force("charge", d3.forceManyBody().strength(-150))
         .force("center", d3.forceCenter())
         .force("x", forceX)
         .force("y", forceY);
@@ -79,8 +79,8 @@ export const runForceGraph = (container, linksData, nodesData, {
         .attr("viewBox", "0 -5 10 10")
         .attr("refX", 16)
         .attr("refY", 0)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 6)
+        .attr("markerWidth", 4)
+        .attr("markerHeight", 4)
         .attr("orient", "auto");
 
     marker.append("path")

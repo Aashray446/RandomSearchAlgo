@@ -4,9 +4,11 @@ import ControlPanel from "../pages/contolPanel";
 
 export default function Playground() {
 
-    const [nodes, setNodes] = React.useState(20);
+    const [nodes, setNodes] = React.useState(10);
 
     const [links, setLinks] = React.useState(20);
+
+
 
     const changeGraph = () => {
         setNodes(nodes % 2 == 0 ? nodes + 1 : nodes - 1)
