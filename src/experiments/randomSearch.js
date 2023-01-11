@@ -59,6 +59,8 @@ export const generateUndirectedNodesAndLinks = function (noOfNodes, noOfLinks) {
 
 export function randomSearch(nodesData, linksData, startNode, targetNode) {
 
+    console.log(nodesData, linksData);
+
     let currentPoint = nodesData.findIndex(node => node.id === startNode);
     let targetIndex = nodesData.findIndex(node => node.id === targetNode);
     let path = [];

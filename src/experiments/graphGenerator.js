@@ -49,9 +49,6 @@ export const runForceGraph = (container, linksData, nodesData, {
             .on("drag", dragged)
             .on("end", dragended));
 
-    d3.selectAll("g.nodes g")
-        .classed("active", d => d.active);
-
     node.append("circle")
         .attr("r", radius);
 
@@ -116,6 +113,8 @@ export const runForceGraph = (container, linksData, nodesData, {
             .attr("transform", function (d) {
                 return "translate(" + d.x + "," + d.y + ")";
             });
+        d3.selectAll("g.nodes g")
+            .classed("activated", d => d.active);
     });
 
     return {
