@@ -58,29 +58,38 @@ export const generateUndirectedNodesAndLinks = function (noOfNodes, noOfLinks) {
 }
 
 export function randomSearch(nodesData, linksData, startNode, targetNode) {
+
     let currentPoint = nodesData.findIndex(node => node.id === startNode);
     let targetIndex = nodesData.findIndex(node => node.id === targetNode);
     let path = [];
     let pathFound = false;
+    console.log(currentPoint, targetIndex);
+    console.log(startNode, targetNode);
 
-    // Random Search Algorithm
-    while (!pathFound) {
-        path.push(nodesData[currentPoint].id);
-        if (currentPoint === targetIndex) {
-            pathFound = true;
-        } else {
-            const links = linksData.filter(link => link.source === nodesData[currentPoint].id);
+    (async () => {
+        while (!pathFound) {
 
-            if (links.length === 0) {
-                path = [];
-                path.push("No Path Found")
+            path.push(nodesData[currentPoint].id);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            nodesData[currentPoint].active = true;
+            if (currentPoint === targetIndex) {
                 pathFound = true;
-                return;
-            }
+            } else {
+                const links = linksData.filter(link => link.source.id === nodesData[currentPoint].id);
 
-            const randomLink = links[Math.floor(Math.random() * links.length)];
-            currentPoint = nodesData.findIndex(node => node.id === randomLink.target);
+                if (links.length === 0) {
+                    path = [];
+                    path.push("No Path Found")
+                    pathFound = true;
+                    return;
+                }
+                const randomLink = links[Math.floor(Math.random() * links.length)];
+                currentPoint = nodesData.findIndex(node => node.id === randomLink.target.id);
+            }
         }
-    }
+    })()
+    console.log(path);
     return path;
+
 }
+
