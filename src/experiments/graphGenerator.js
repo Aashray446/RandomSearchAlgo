@@ -68,7 +68,7 @@ export const runForceGraph = (container, linksData, nodesData, {
         .enter().append("line")
         .attr("stroke-width", 1.5) // Use the value property to set the stroke width
         .attr("marker-end", "url(#arrowhead)")
-        .attr("stroke", "#999");
+        .attr("stroke", "white");
 
 
     if (graphType == "directed") {
@@ -78,9 +78,10 @@ export const runForceGraph = (container, linksData, nodesData, {
             .attr("viewBox", "0 -5 10 10")
             .attr("refX", radius * 6)
             .attr("refY", 0)
-            .attr("markerWidth", 6)
-            .attr("markerHeight", 6)
-            .attr("orient", "auto");
+            .attr("markerWidth", 8)
+            .attr("markerHeight", 8)
+            .attr("orient", "auto")
+            .attr("fill", "white");
         marker.append("path")
             .attr("d", "M0,-5L10,0L0,5");
     }

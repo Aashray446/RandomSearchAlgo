@@ -12,7 +12,7 @@ const ForceGraph = ({ nodesAndLinks, graphType }) => {
                 nodesAndLinks.links,
                 nodesAndLinks.nodes,
                 {
-                    color: "#FFFF66",
+                    color: "#808080",
                     radius: 26,
                     graphType: graphType ? "undirected" : "directed",
                 }

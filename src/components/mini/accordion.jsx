@@ -10,7 +10,7 @@ export function Accordion(props) {
     return (
         <div className="relative bg-white rounded-md shadow">
             <button
-                className=" w-full px-4 py-3 font-medium text-left leading-5 text-gray-700 transition duration-150 ease-in-out bg-primary rounded-t-md focus:outline-none focus:shadow-outline-blue "
+                className=" w-full px-4 py-3 font-medium text-left leading-5 text-gray-700 transition duration-150 ease-in-out bg-secondary rounded-t-md focus:outline-none focus:shadow-outline-blue "
                 onClick={toggleAccordion}
             >
                 {props.title}

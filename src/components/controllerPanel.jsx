@@ -6,6 +6,8 @@ export default function ControllerPanel({ changeGraph, nodesAndLinks, changeGrap
     const [source, setSource] = useState('');
     const [destination, setDestination] = useState('');
     const [path, setPath] = useState();
+
+
     const handleSourceChange = (e) => {
         setSource(e.target.value);
     }
@@ -33,7 +35,7 @@ export default function ControllerPanel({ changeGraph, nodesAndLinks, changeGrap
     }, [nodesAndLinks])
 
     return (
-        <div className="grid grid-cols-2 gap-10 tracking-widest p-5 bg-base-100 m-4">
+        <div className="grid grid-cols-2 gap-10 shadow-sm shadow-gray-700 tracking-widest p-5 bg-blue m-4">
             <Switch changeGraphType={changeGraphType} id={"toggle"} ></Switch>
             <button className="btn btn-primary" onClick={() => changeGraph(10, 15)} >Generate Random</button>
             <input type="text" value={source} onChange={handleSourceChange} className="input input-bordered input-accent bg-white" placeholder="Source Node" />

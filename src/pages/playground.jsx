@@ -7,6 +7,7 @@ export default function Playground() {
 
     const [graph, graphChanged] = React.useState(false);
     const [graphChoice, setGraphChoice] = React.useState(true);
+
     let nodesAndLinks;
     graphChoice ? nodesAndLinks = generateUndirectedNodesAndLinks(5, 5) : nodesAndLinks = generateDirectedNodesAndLinks(5, 5);
 
