@@ -18,6 +18,11 @@ export const generateDirectedNodesAndLinks = function (noOfNodes, noOfLinks) {
     for (let i = 0; i < noOfLinks; i++) {
         const source = nodes[Math.floor(Math.random() * nodes.length)].id;
         const target = nodes[Math.floor(Math.random() * nodes.length)].id;
+
+        if (source == target) {
+            i--;
+            continue;
+        }
         links.push({ source, target, value: Math.floor(Math.random() * 10) + 1 });
     }
 
@@ -57,41 +62,30 @@ export const generateUndirectedNodesAndLinks = function (noOfNodes, noOfLinks) {
 
 }
 
-export function randomSearch(nodesData, linksData, startNode, targetNode) {
-
-    console.log(nodesData, linksData);
-
+export async function randomSearch(nodesData, linksData, startNode, targetNode) {
     let currentPoint = nodesData.findIndex(node => node.id === startNode);
     let targetIndex = nodesData.findIndex(node => node.id === targetNode);
     let path = [];
     let pathFound = false;
-    console.log(currentPoint, targetIndex);
-    console.log(startNode, targetNode);
 
-    (async () => {
-        while (!pathFound) {
+    while (!pathFound) {
+        path.push(nodesData[currentPoint].id);
+        nodesData[currentPoint].active = true;
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        if (currentPoint === targetIndex) {
+            pathFound = true;
+            return path;
+        } else {
+            const links = linksData.filter(link => link.source.id === nodesData[currentPoint].id);
 
-            path.push(nodesData[currentPoint].id);
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            nodesData[currentPoint].active = true;
-            if (currentPoint === targetIndex) {
-                pathFound = true;
-            } else {
-                const links = linksData.filter(link => link.source.id === nodesData[currentPoint].id);
-
-                if (links.length === 0) {
-                    path = [];
-                    path.push("No Path Found")
-                    pathFound = true;
-                    return;
-                }
-                const randomLink = links[Math.floor(Math.random() * links.length)];
-                currentPoint = nodesData.findIndex(node => node.id === randomLink.target.id);
+            if (links.length === 0) {
+                return false;
             }
+            const randomLink = links[Math.floor(Math.random() * links.length)];
+            currentPoint = nodesData.findIndex(node => node.id === randomLink.target.id);
         }
-    })()
-    console.log(path);
-    return path;
-
+    }
 }
+
+
 

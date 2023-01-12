@@ -21,7 +21,7 @@ export const runForceGraph = (container, linksData, nodesData, {
     const forceY = d3.forceY().y(d => d.y).strength(0.01);
 
     const simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(d => d.id).strength(d => linkStrengthScale(d.value / 1000)))
+        .force("link", d3.forceLink().id(d => d.id).strength(d => linkStrengthScale(d.value / 800)))
         .force("charge", d3.forceManyBody().strength(-150))
         .force("center", d3.forceCenter())
         .force("x", forceX)
@@ -56,7 +56,8 @@ export const runForceGraph = (container, linksData, nodesData, {
         .text(d => d.id)
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "central")
-        .attr("fill", "black");
+        .attr("fill", "black")
+        .attr("font-size", "large");
 
 
     const link = svg.append("g")
@@ -64,7 +65,7 @@ export const runForceGraph = (container, linksData, nodesData, {
         .selectAll("line")
         .data(linksData)
         .enter().append("line")
-        .attr("stroke-width", 2) // Use the value property to set the stroke width
+        .attr("stroke-width", 1.5) // Use the value property to set the stroke width
         .attr("marker-end", "url(#arrowhead)")
         .attr("stroke", "#999");
 
@@ -74,10 +75,10 @@ export const runForceGraph = (container, linksData, nodesData, {
         .append("marker")
         .attr("id", "arrowhead")
         .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 16)
+        .attr("refX", radius * 6)
         .attr("refY", 0)
-        .attr("markerWidth", 4)
-        .attr("markerHeight", 4)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
         .attr("orient", "auto");
 
     marker.append("path")
@@ -113,6 +114,8 @@ export const runForceGraph = (container, linksData, nodesData, {
             .attr("transform", function (d) {
                 return "translate(" + d.x + "," + d.y + ")";
             });
+
+
         d3.selectAll("g.nodes g")
             .classed("activated", d => d.active);
     });

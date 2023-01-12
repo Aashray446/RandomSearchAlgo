@@ -5,7 +5,7 @@ export default function ControllerPanel({ changeGraph, nodesAndLinks }) {
 
     const [source, setSource] = useState('');
     const [destination, setDestination] = useState('');
-
+    const [path, setPath] = useState();
     const handleSourceChange = (e) => {
         setSource(e.target.value);
     }
@@ -14,9 +14,22 @@ export default function ControllerPanel({ changeGraph, nodesAndLinks }) {
         setDestination(e.target.value);
     }
 
+    const startSearch = async (nodes, links, source, destination) => {
+        const result = await randomSearch(nodes, links, source, destination)
+
+        if (result) {
+            setPath(result);
+            return;
+        }
+        window.alert("Path not found");
+    }
+
 
     useEffect(() => {
-        // console.log(nodesAndLinks);
+
+        setPath();
+        setSource('');
+        setDestination('');
     }, [nodesAndLinks])
 
     return (
@@ -25,7 +38,15 @@ export default function ControllerPanel({ changeGraph, nodesAndLinks }) {
             <button className="btn btn-primary" onClick={() => changeGraph(10, 15)} >Generate Random</button>
             <input type="text" value={source} onChange={handleSourceChange} className="input input-bordered input-accent bg-white" placeholder="Source Node" />
             <input type="text" value={destination} onChange={handleDestinationChange} className="input input-bordered input-accent bg-white col-span-full " placeholder="Destination Node" />
-            <button className="btn btn-secondary" onClick={() => randomSearch(nodesAndLinks.nodes, nodesAndLinks.links, source, destination)}>Find Path</button>
+            <button className="btn btn-secondary" onClick={() => startSearch(nodesAndLinks.nodes, nodesAndLinks.links, source, destination)}>Find Path</button>
+            {
+                path ? <div >
+                    <h6 className="font-bold tracking-wide">Path Found</h6>
+                    {path && path.map((node, index) => {
+                        return <span className="text-lg text-accent pr-2" key={index}>{node} {index != path.length - 1 ? '-->' : ''}</span>
+                    })}
+                </div> : null
+            }
         </div>
 
     );
