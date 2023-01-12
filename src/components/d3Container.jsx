@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { runForceGraph } from "../experiments/graphGenerator";
 
-const ForceGraph = ({ nodesAndLinks }) => {
+const ForceGraph = ({ nodesAndLinks, graphType }) => {
     const containerRef = useRef(null);
     let changePointer;
 
@@ -14,6 +14,7 @@ const ForceGraph = ({ nodesAndLinks }) => {
                 {
                     color: "#FFFF66",
                     radius: 26,
+                    graphType: graphType ? "undirected" : "directed",
                 }
             );
         }

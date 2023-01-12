@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 export const runForceGraph = (container, linksData, nodesData, {
     color,
     radius,
+    graphType
 }) => {
 
     if (container.innerHTML != "") {
@@ -69,20 +70,23 @@ export const runForceGraph = (container, linksData, nodesData, {
         .attr("marker-end", "url(#arrowhead)")
         .attr("stroke", "#999");
 
-    // Define the arrowhead marker
-    // Define the arrowhead marker
-    const marker = svg.append("defs")
-        .append("marker")
-        .attr("id", "arrowhead")
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", radius * 6)
-        .attr("refY", 0)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 6)
-        .attr("orient", "auto");
 
-    marker.append("path")
-        .attr("d", "M0,-5L10,0L0,5");
+    if (graphType == "directed") {
+        const marker = svg.append("defs")
+            .append("marker")
+            .attr("id", "arrowhead")
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", radius * 6)
+            .attr("refY", 0)
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("orient", "auto");
+        marker.append("path")
+            .attr("d", "M0,-5L10,0L0,5");
+    }
+
+
+
 
     function dragstarted(event) {
         if (!event.active) simulation.alphaTarget(1).restart();
