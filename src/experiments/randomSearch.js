@@ -52,12 +52,15 @@ export const generateUndirectedNodesAndLinks = function (noOfNodes, noOfLinks) {
         const target = nodes[Math.floor(Math.random() * nodes.length)].id;
 
         // check if the relation exist
+        if (source == target || links.find(link => (link.source === source && link.target === target) || (link.source === target && link.target === source))) {
+            i--;
+            continue;
+        }
 
-
-        links.push({ source, target, value: Math.floor(Math.random() * 10) + 1 });
+        const value = Math.floor(Math.random() * 10) + 1;
+        links.push({ source, target, value: value });
+        links.push({ source: target, target: source, value: value });
     }
-
-
     return { nodes, links };
 
 }
