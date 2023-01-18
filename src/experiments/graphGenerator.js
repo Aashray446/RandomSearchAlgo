@@ -39,6 +39,16 @@ export const runForceGraph = (container, linksData, nodesData, {
             svg.attr("transform", d3.event.transform);
         }));
 
+
+    const link = svg.append("g")
+        .attr("class", "links")
+        .selectAll("line")
+        .data(linksData)
+        .enter().append("line")
+        .attr("stroke-width", 1.5) // Use the value property to set the stroke width
+        .attr("marker-end", "url(#arrowhead)")
+        .attr("stroke", "white");
+
     const node = svg.append("g")
         .attr("class", "nodes")
         .selectAll("g")
@@ -61,22 +71,13 @@ export const runForceGraph = (container, linksData, nodesData, {
         .attr("font-size", "large");
 
 
-    const link = svg.append("g")
-        .attr("class", "links")
-        .selectAll("line")
-        .data(linksData)
-        .enter().append("line")
-        .attr("stroke-width", 1.5) // Use the value property to set the stroke width
-        .attr("marker-end", "url(#arrowhead)")
-        .attr("stroke", "white");
-
 
     if (graphType == "directed") {
         const marker = svg.append("defs")
             .append("marker")
             .attr("id", "arrowhead")
             .attr("viewBox", "0 -5 10 10")
-            .attr("refX", radius * 6)
+            .attr("refX", radius * 4.5)
             .attr("refY", 0)
             .attr("markerWidth", 8)
             .attr("markerHeight", 8)
@@ -128,6 +129,8 @@ export const runForceGraph = (container, linksData, nodesData, {
             .classed("deadEnd", d => d.deadEnd);
         d3.selectAll("g.nodes g")
             .classed("activated", d => d.active);
+        d3.selectAll("g.links line")
+            .classed("selected", d => d.selected);
 
     });
 

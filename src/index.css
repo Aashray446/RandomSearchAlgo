@@ -51,3 +51,7 @@ html {
 .start {
   fill: blue !important;
 }
+
+.selected {
+  stroke: green !important;
+}

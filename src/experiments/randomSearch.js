@@ -73,7 +73,6 @@ export async function randomSearch(nodesData, linksData, startNode, targetNode) 
     let pathFound = false;
 
     while (!pathFound) {
-        console.log(nodesData, linksData);
         path.push(nodesData[currentPoint].id);
         nodesData[currentPoint].active = true;
         await new Promise(resolve => setTimeout(resolve, 1500));
@@ -82,13 +81,19 @@ export async function randomSearch(nodesData, linksData, startNode, targetNode) 
             pathFound = true;
             return path;
         } else {
+            // Selecting the links
             const links = linksData.filter(link => link.source.id === nodesData[currentPoint].id);
+
+            links.map(link => link.selected = true)
+            await new Promise(resolve => setTimeout(resolve, 1500))
+            links.map(link => link.selected = false)
 
             if (links.length === 0) {
                 nodesData[currentPoint].deadEnd = true;
                 return false;
             }
             const randomLink = links[Math.floor(Math.random() * links.length)];
+            randomLink.selected = true
             currentPoint = nodesData.findIndex(node => node.id === randomLink.target.id);
         }
     }
