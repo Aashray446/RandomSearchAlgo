@@ -120,9 +120,15 @@ export const runForceGraph = (container, linksData, nodesData, {
                 return "translate(" + d.x + "," + d.y + ")";
             });
 
-
+        d3.selectAll("g.nodes g")
+            .classed("start", d => d.startNode);
+        d3.selectAll("g.nodes g")
+            .classed("found", d => d.targetNode);
+        d3.selectAll("g.nodes g")
+            .classed("deadEnd", d => d.deadEnd);
         d3.selectAll("g.nodes g")
             .classed("activated", d => d.active);
+
     });
 
     return {

@@ -47,3 +47,7 @@ html {
 .found {
   fill : green !important;
 }
+
+.start {
+  fill: blue !important;
+}

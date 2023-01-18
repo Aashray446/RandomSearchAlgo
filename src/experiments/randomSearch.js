@@ -67,21 +67,25 @@ export const generateUndirectedNodesAndLinks = function (noOfNodes, noOfLinks) {
 
 export async function randomSearch(nodesData, linksData, startNode, targetNode) {
     let currentPoint = nodesData.findIndex(node => node.id === startNode);
+    nodesData[currentPoint].startNode = true;
     let targetIndex = nodesData.findIndex(node => node.id === targetNode);
     let path = [];
     let pathFound = false;
 
     while (!pathFound) {
+        console.log(nodesData, linksData);
         path.push(nodesData[currentPoint].id);
         nodesData[currentPoint].active = true;
         await new Promise(resolve => setTimeout(resolve, 1500));
         if (currentPoint === targetIndex) {
+            nodesData[currentPoint].targetNode = true;
             pathFound = true;
             return path;
         } else {
             const links = linksData.filter(link => link.source.id === nodesData[currentPoint].id);
 
             if (links.length === 0) {
+                nodesData[currentPoint].deadEnd = true;
                 return false;
             }
             const randomLink = links[Math.floor(Math.random() * links.length)];
