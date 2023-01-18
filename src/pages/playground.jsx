@@ -5,19 +5,18 @@ import { generateDirectedNodesAndLinks, generateUndirectedNodesAndLinks } from "
 
 export default function Playground() {
 
-    const [graph, graphChanged] = React.useState(false);
     const [graphChoice, setGraphChoice] = React.useState(true);
-
-    let nodesAndLinks;
-    graphChoice ? nodesAndLinks = generateUndirectedNodesAndLinks(5, 5) : nodesAndLinks = generateDirectedNodesAndLinks(5, 5);
+    const [nodesAndLinks, setNodesAndLinks] = React.useState(generateUndirectedNodesAndLinks(10, 10));
 
 
     const changeGraph = (noOfNodes, noOfLinks) => {
-        graphChoice ? nodesAndLinks = generateUndirectedNodesAndLinks(noOfNodes, noOfLinks) : nodesAndLinks = generateDirectedNodesAndLinks(noOfNodes, noOfLinks);
-        graphChanged(!graph);
+        console.log("changeGraph");
+        console.log(noOfNodes, noOfLinks);
+        setNodesAndLinks(graphChoice ? generateUndirectedNodesAndLinks(noOfNodes, noOfLinks) : generateDirectedNodesAndLinks(noOfNodes, noOfLinks));
     }
 
     const changeGraphType = (e) => {
+        setNodesAndLinks(e ? generateUndirectedNodesAndLinks(10, 10) : generateDirectedNodesAndLinks(10, 10));
         setGraphChoice(e);
     }
 
