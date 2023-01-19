@@ -1,3 +1,13 @@
+const event = new CustomEvent('randomSearch')
+export const feedbackDetails = [];
+
+
+const updatefeedBack = (command) => {
+    feedbackDetails.push(command);
+    window.dispatchEvent(event);
+}
+
+
 export const generateDirectedNodesAndLinks = function (noOfNodes, noOfLinks) {
 
     let nodes = [];
@@ -66,6 +76,7 @@ export const generateUndirectedNodesAndLinks = function (noOfNodes, noOfLinks) {
 }
 
 export async function randomSearch(nodesData, linksData, startNode, targetNode) {
+    feedbackDetails.length = 0;
     let currentPoint = nodesData.findIndex(node => node.id === startNode);
     nodesData[currentPoint].startNode = true;
     let targetIndex = nodesData.findIndex(node => node.id === targetNode);
@@ -74,6 +85,9 @@ export async function randomSearch(nodesData, linksData, startNode, targetNode) 
 
     while (!pathFound) {
         path.push(nodesData[currentPoint].id);
+
+        updatefeedBack("Selected the source node: " + nodesData[currentPoint].id);
+
         nodesData[currentPoint].active = true;
         await new Promise(resolve => setTimeout(resolve, 1500));
         if (currentPoint === targetIndex) {
@@ -82,8 +96,10 @@ export async function randomSearch(nodesData, linksData, startNode, targetNode) 
             return path;
         } else {
             // Selecting the links
+            updatefeedBack("Selecting the links");
             const links = linksData.filter(link => link.source.id === nodesData[currentPoint].id);
-
+            updatefeedBack("Links selected " + links.length + " links" + " from " + nodesData[currentPoint].id);
+            await new Promise(resolve => setTimeout(resolve, 1000))
             links.map(link => link.selected = true)
             await new Promise(resolve => setTimeout(resolve, 1500))
             links.map(link => link.selected = false)
