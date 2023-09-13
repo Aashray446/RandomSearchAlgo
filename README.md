@@ -1,4 +1,4 @@
 # RandomSearchAlgo
 ## Visualize the random search algorithm
 
-![image](https://github.com/Aashray446/RandomSearchAlgo/assets/69245931/7034937a-4e24-443f-80f3-a479b8a03655)
+![image](https://github.com/Aashray446/RandomSearchAlgo/assets/69245931/9add2cea-4a89-45ff-9bdc-045369b607f7)
